@@ -1,0 +1,19 @@
+uuid: bd04b4fe-8fcc-4480-84d4-79f674f33987
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_foo_bar
+    - node.type.page
+id: node.page.field_foo_bar
+field_name: field_foo_bar
+entity_type: node
+bundle: page
+label: 'Foo Bar'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
