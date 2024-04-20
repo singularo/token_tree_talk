@@ -1,0 +1,88 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+      args:
+        USER_ID: ${USER_ID:-1000}
+        GROUP_ID: ${GROUP_ID:-1000}
+    # This image is the local development version, built using the above details.
+    image: myproject/s2i-shepherd-local:develop
+    hostname: ${PROJECT}.${DOMAIN:-172.17.0.1.nip.io}
+    environment:
+      CONFIG_SYNC_DIR: ../config/sync
+      DATABASE_HOST: db
+      DATABASE_USER: user
+      DATABASE_PASSWORD: password
+      DRUSH_OPTIONS_URI: http://${PROJECT}.${DOMAIN:-172.17.0.1.nip.io}:8080
+      HASH_SALT: random-hash
+      MEMCACHE_ENABLED: 0
+      MEMCACHE_HOST: memcached
+      PHP_IDE_CONFIG: serverName=${PROJECT}.${DOMAIN:-172.17.0.1.nip.io}
+      PUBLIC_DIR: /shared/public
+      SHEPHERD_ENVIRONMENT: local
+      SHEPHERD_SECRET_PATH: /code/private
+      SITE_TITLE: Drupal site
+      SITE_MAIL: site@example.com
+      SITE_ADMIN_EMAIL: admin@example.com
+      SITE_ADMIN_USERNAME: admin
+      SITE_ADMIN_PASSWORD: password
+      #SQLITE_DATABASE: /shared/database.sqlite3
+      SSH_AUTH_SOCK: /ssh/ssh
+      TMP_DIR: /shared/tmp
+
+      SIMPLETEST_BASE_URL: http://${PROJECT}.${DOMAIN:-172.17.0.1.nip.io}:8080
+      DTT_BASE_URL: http://${PROJECT}.${DOMAIN:-172.17.0.1.nip.io}:8080
+
+      SHEPHERD_REVERSE_PROXY: 1
+      SHEPHERD_REVERSE_PROXY_ADDRESSES: 127.0.0.1,172.17.0.0/16
+      SHEPHERD_REVERSE_PROXY_TRUSTED: 26
+
+      # Use jwilder/nginx-proxy for virtual hosts.
+      VIRTUAL_HOST: ${PROJECT}.${DOMAIN:-172.17.0.1.nip.io}
+      # Do not define this as '/' or apache2 will give strange behaviour, to test locally,
+      # change to the web directory and create a symlink to the subpath name eg ln -s . subpath
+      # WEB_PATH: /subpath
+
+      XDEBUG_CONFIG: "client_host=172.17.0.1 max_nesting_level=1500"
+      XDEBUG_MODE: debug,develop
+      XDEBUG_SESSION: 1
+    env_file:
+      - .env
+    volumes:
+      - .:/code
+      - ./shared:/shared
+      - ./shared/public:/code/web/sites/default/files
+      - ${SSH_AUTH_SOCK}:/ssh/ssh
+    networks:
+      - default
+
+  db:
+    image: mariadb
+    environment:
+      MYSQL_DATABASE: drupal
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: super-secret-password
+    networks:
+      - default
+
+  mail:
+    image: axllent/mailpit
+    environment:
+      VIRTUAL_HOST: mail.${PROJECT}.${DOMAIN:-172.17.0.1.nip.io}
+      VIRTUAL_PORT: 8025
+    networks:
+      - default
+
+  memcached:
+    image: memcached:alpine
+    networks:
+      - default
+
+  selenium:
+    image: selenium/standalone-chrome:106.0
+    volumes:
+      - /dev/shm:/dev/shm
+    networks:
+      - default
