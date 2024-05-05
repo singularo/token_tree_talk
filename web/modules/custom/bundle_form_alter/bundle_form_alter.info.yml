@@ -1,0 +1,5 @@
+name: Bundle form alter
+type: module
+description: 'Move form alter to bundle class.'
+core_version_requirement: ^10
+version: '0.0.1'

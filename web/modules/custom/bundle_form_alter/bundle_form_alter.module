@@ -1,0 +1,33 @@
+<?php
+
+declare(strict_types=1);
+
+use Drupal\bundle_form_alter\Form\BundleFormAlterInterface;
+use Drupal\Core\Entity\EntityFormInterface;
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_form_alter().
+ *
+ * This hook triggers BundleFormAlterInterface for Bundle classes.
+ *
+ * @noinspection PhpUnused
+ */
+function bundle_form_alter_form_alter(&$form, FormStateInterface $form_state, $form_id): void {
+  // If its not an entity form, bail.
+  $formObject = $form_state->getFormObject();
+  if (!$formObject instanceof EntityFormInterface) {
+    return;
+  }
+
+  // If its a delete form, DO NOTHING.
+  if (str_contains($form_id, '_delete_form')) {
+    return;
+  }
+
+  // If the entity implements form alter, do it.
+  $entity = $formObject->getEntity();
+  if ($entity instanceof BundleFormAlterInterface) {
+    $entity->formAlter($form, $form_state, $form_id);
+  }
+}
