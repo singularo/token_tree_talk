@@ -1,0 +1,5 @@
+name: Token tree content
+type: module
+description: "Provide example content for token tree talk."
+core_version_requirement: ^10
+version: '0.0.1'

@@ -1,0 +1,48 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 2dfca9b8-fcd2-4fc9-80f5-c30d46adc7fb
+  bundle: page
+  default_langcode: en
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Testing basic page'
+  created:
+    -
+      value: 1714885093
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: ''
+      langcode: en
+  field_bar:
+    -
+      value: 'Bar test field'
+  field_foo:
+    -
+      value: 'Foo test field'
+  field_foo_bar:
+    -
+      value: 'Foo bar field'
+  field_test:
+    -
+      value: '<p>[node:field_foo]</p><p>&nbsp;</p><p>[node:field_foo_bar]</p><p>&nbsp;</p><p>[node:field_bar]</p>'
+      format: full_html

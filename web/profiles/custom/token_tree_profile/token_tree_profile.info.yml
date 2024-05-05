@@ -1,0 +1,16 @@
+name: Token Tree Profile
+type: profile
+description: 'Install profile to go with Token Tree filter talk.'
+core_version_requirement: ^10
+version: '0.0.1'
+
+install:
+  # Core
+  - drupal:node
+  - drupal:token
+  - drupal:token_filter
+
+  # Contrib
+  - drupal:admin_toolbar
+  - drupal:admin_toolbar_tools
+  - drupal:default_content
