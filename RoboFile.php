@@ -12,6 +12,9 @@
 
 declare(strict_types=1);
 
+use Symfony\Component\Finder\Finder;
+use Symfony\Component\Yaml\Yaml;
+
 include_once 'RoboFileBase.php';
 
 /**
@@ -34,7 +37,7 @@ class RoboFile extends RoboFileBase {
   /**
    * Example of how to install from existing config.
    * Uncomment to use.
-   *
+   */
   public function buildInstall(): void {
     $this->drush('site:install')
       ->arg($this->drupalProfile)
@@ -46,7 +49,46 @@ class RoboFile extends RoboFileBase {
       ->option('site-mail', $this->config['site']['mail'])
       ->option('yes')
       ->run();
-    }
-    */
 
+    $this->drush('pm:enable')
+      ->arg('token_tree_content')
+      ->run();
   }
+
+  /**
+   * Export the default content for the profile module.
+   *
+   * @noinspection PhpUnused
+   */
+  public function devContentExport($module = '/code/web/profiles/custom/token_tree_profile/modules/token_tree_content'): void {
+    $folder = $module . '/content';
+
+    // Export the references.
+    $this->drush('default-content:export-references')
+      ->arg('node')
+      ->rawArg('--folder=' . $folder)
+      ->run();
+
+    // Load the existing yml of the module
+    $moduleFile = Yaml::parseFile($module . '/' . basename($module) . '.info.yml');
+
+    foreach ((new Finder())->directories()->in($folder) as $directory) {
+      $dir = (string)$directory;
+      $dirArray = explode('/', $dir);
+      $type = end($dirArray);
+      unset($moduleFile['default_content'][$type]);
+
+      $files = [];
+      foreach ((new Finder())->files()->name('*.yml')->in($dir) as $filename) {
+        $fileArray = explode('/', (string)$filename);
+        $file = end($fileArray);
+        array_unshift($files, rtrim($file, '.yml'));
+      }
+      $moduleFile['default_content'][$type] = $files;
+    }
+
+    $this->say('Updated module info file.');
+    $this->io()->write(Yaml::dump($moduleFile, 3, 2));
+  }
+
+}
