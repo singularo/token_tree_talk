@@ -8,7 +8,7 @@ use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\Core\DependencyInjection\ServiceProviderBase;
 
 /**
- * Modifies the language manager service.
+ * Modifies the Token tree builder service.
  */
 class TokenTreeFilterServiceProvider extends ServiceProviderBase {
 
