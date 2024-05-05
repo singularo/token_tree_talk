@@ -16,13 +16,14 @@
     ],
     "require": {
         "composer/installers": "^2.0",
-        "drupal/content_draggable": "^1.0",
+        "drupal/admin_toolbar": "^3.4",
         "drupal/core-composer-scaffold": "^10.2",
         "drupal/core-project-message": "^10.2",
         "drupal/core-recommended": "^10.2",
+        "drupal/default_content": "^2.0@alpha",
         "drupal/token": "^1.14",
         "drupal/token_filter": "^2.1",
-        "singularo/shepherd-drupal-scaffold": "dev-develop"
+        "singularo/dsh": "dev-develop"
     },
     "conflict": {
         "drupal/drupal": "*"
@@ -37,7 +38,7 @@
             "phpstan/extension-installer": true,
             "dealerdirect/phpcodesniffer-composer-installer": true,
             "php-http/discovery": true,
-            "singularo/shepherd-drupal-scaffold": true
+            "singularo/dsh": true
         },
         "sort-packages": true
     },
@@ -46,7 +47,7 @@
             "locations": {
                 "web-root": "web/"
             },
-            "allowed-packages": ["singularo/shepherd-drupal-scaffold"]
+            "allowed-packages": ["singularo/dsh"]
         },
         "installer-paths": {
             "web/core": [
