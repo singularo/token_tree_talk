@@ -1,0 +1,42 @@
+<?php
+
+/**
+ * Example usage for token_tree_example
+ */
+
+declare(strict_types=1);
+
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_form_alter().
+ *
+ * @noinspection PhpUnused
+ */
+function token_tree_example_form_alter(&$form, FormStateInterface $form_state, $form_id): void {
+
+  if (!in_array($form_id, ['node_page_form', 'node_page_edit_form'])) {
+    return;
+  }
+
+  // Add token tree.
+  $form['field_test']['token_help'] = [
+    '#type' => 'container',
+    '#weight' => 99,
+    'token_link' => [
+      '#token_types' => [
+        'node%field_foo',
+        'node%field_bar',
+        'node!field_foo_bar',
+      ],
+      '#theme' => 'token_tree_link',
+      '#show_restricted' => FALSE,
+      '#show_nested' => FALSE,
+      '#global_types' => FALSE,
+      '#click_insert' => TRUE,
+      '#recursion_limit' => 1,
+      '#weight' => 90,
+    ],
+  ];
+
+}

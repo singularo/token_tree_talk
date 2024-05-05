@@ -1,0 +1,7 @@
+name: Token tree example
+type: module
+description: 'Example usage of the token tree filter.'
+core_version_requirement: ^10
+version: '0.0.1'
+dependencies:
+  - drupal:token_tree_filter
