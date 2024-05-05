@@ -43,6 +43,7 @@ module:
   token: 0
   token_filter: 0
   token_tree_content: 0
+  token_tree_example: 0
   token_tree_filter: 0
   toolbar: 0
   update: 0
