@@ -1,0 +1,8 @@
+name: Page bundle
+type: module
+description: 'Bundle class extension for page module.'
+core_version_requirement: ^10
+version: '0.0.1'
+dependencies:
+  - drupal:bundle_form_alter
+  - drupal:token_tree_filter
