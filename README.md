@@ -1,18 +1,26 @@
 
-Setup the project initially.
+## Token tree filter.
+This repo contains the code for the token tree filter presentation.
 
-```bash
-composer config --append allow-plugins.singularo/shepherd-drupal-scaffold true
-composer config --append --json extra.drupal-scaffold.allowed-packages '["singularo/shepherd-drupal-scaffold"]'
-composer require singularo/shepherd-drupal-scaffold:dev-develop
+To try out the code yourself, docker and composer need to be installed,
+then after some simple, the site will be ready to go.
+
+## Setup steps after cloning the repo
+```
+composer install
+./dsh
+robo build
+drush uli
 ```
 
-The site can now be brought up with:
-```bash
-dsh
+## Other useful things:
+
+#### See the available robo commands.
+```
+robo
 ```
 
-But we need other modules:
-```bash
-composer require drupal/token
+#### Update the default content in the profile.
+```
+robo dev:content-export
 ```
