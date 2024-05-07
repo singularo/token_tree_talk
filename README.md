@@ -7,7 +7,7 @@ then after some simple, the site will be ready to go.
 
 ## Setup steps after cloning the repo
 ```
-composer install
+composer install --ignore-platform-reqs
 ./dsh
 robo build
 drush uli

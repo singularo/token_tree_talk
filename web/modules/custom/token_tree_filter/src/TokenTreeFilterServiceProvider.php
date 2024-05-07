@@ -9,6 +9,8 @@ use Drupal\Core\DependencyInjection\ServiceProviderBase;
 
 /**
  * Modifies the Token tree builder service.
+ *
+ * Ideas taken from https://www.drupal.org/docs/drupal-apis/services-and-dependency-injection/altering-existing-services-providing-dynamic-services
  */
 class TokenTreeFilterServiceProvider extends ServiceProviderBase {
 
