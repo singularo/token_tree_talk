@@ -3627,12 +3627,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/singularo/dsh.git",
-                "reference": "fde6238f510ca647bacd9a0ffdbae35158e64138"
+                "reference": "f775a64add7ed618ba851cb4e769fb37eaa69f62"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/singularo/dsh/zipball/fde6238f510ca647bacd9a0ffdbae35158e64138",
-                "reference": "fde6238f510ca647bacd9a0ffdbae35158e64138",
+                "url": "https://api.github.com/repos/singularo/dsh/zipball/f775a64add7ed618ba851cb4e769fb37eaa69f62",
+                "reference": "f775a64add7ed618ba851cb4e769fb37eaa69f62",
                 "shasum": ""
             },
             "require": {
@@ -3730,7 +3730,7 @@
                 "issues": "https://github.com/singularo/dsh/issues",
                 "source": "https://github.com/singularo/dsh/tree/develop"
             },
-            "time": "2024-04-29T06:07:04+00:00"
+            "time": "2024-05-08T05:46:39+00:00"
         },
         {
             "name": "symfony/console",

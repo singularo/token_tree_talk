@@ -50,9 +50,6 @@ class RoboFile extends RoboFileBase {
       ->option('yes')
       ->run();
 
-    $this->drush('pm:enable')
-      ->arg('token_tree_content')
-      ->run();
   }
 
   /**
